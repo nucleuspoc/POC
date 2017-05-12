@@ -1,0 +1,77 @@
+- name: Gather facts about all Server Hardwares
+  oneview_server_hardware_facts:
+    config: "{{ playbook_dir }}/config.json"
+  delegate_to: localhost
+
+- debug: var=server_hardwares
+
+
+- name: Gather paginated, filtered and sorted facts about Server Hardware
+  oneview_server_hardware_facts:
+    config: "{{ playbook_dir }}/config.json"
+    params:
+      start: 0
+      count: 3
+      sort: name:ascending
+      filter: uidState='Off'
+  delegate_to: localhost
+
+- debug: msg="{{server_hardwares | map(attribute='name') | list }}"
+
+
+- name: Gather facts about a Server Hardware by name
+  oneview_server_hardware_facts:
+    config: "{{ playbook_dir }}/config.json"
+    name: "10.0.5.2"
+  delegate_to: localhost
+
+- debug: var=server_hardwares
+
+
+- name: Gather BIOS facts about a Server Hardware
+  oneview_server_hardware_facts:
+    config: "{{ playbook_dir }}/config.json"
+    name: "CZ3712MP48, bay 1"
+    options:
+      - bios
+  delegate_to: localhost
+
+- debug: var=server_hardwares
+- debug: var=server_hardware_bios
+
+
+- name: Gather all facts about a Server Hardware
+  oneview_server_hardware_facts:
+   config: "{{ playbook_dir }}/config.json"
+   name : "CZ3712MP48, bay 1"
+   options:
+       - bios                   # optional
+       - javaRemoteConsoleUrl   # optional
+       - environmentalConfig    # optional
+      # - iloSsoUrl              # optional
+      # - remoteConsoleUrl       # optional
+       - utilization:           # optional
+                fields : 'AveragePower'
+                filter : ['startDate=2016-05-30T03:29:42.000Z']
+                view : 'day'
+       - firmware               # optional
+  delegate_to: localhost
+
+- debug: var=server_hardwares
+- debug: var=server_hardware_bios
+- debug: var=server_hardware_env_config
+- debug: var=server_hardware_java_remote_console_url
+- debug: var=server_hardware_ilo_sso_url
+- debug: var=server_hardware_remote_console_url
+- debug: var=server_hardware_utilization
+- debug: var=server_hardware_firmware
+
+- name: Gather facts about the Server Hardware firmware
+  oneview_server_hardware_facts:
+   config: "{{ playbook_dir }}/config.json"
+   name : "0000A66102, bay 12"
+   options:
+       - firmware
+  delegate_to: localhost
+
+- debug: var=server_hardware_firmware
