@@ -1,0 +1,13 @@
+- name: Create a Volume with a specified Storage Pool
+  oneview_volume:
+    config: "{{ playbook_dir }}/config.json"
+    state: present
+    data:
+      name: 'Volume with Storage Pool'
+      description: 'Test volume with common creation: Storage Pool'
+      provisioningParameters:
+          provisionType: 'Full'
+          shareable: True
+          requestedCapacity: 111073741824  # 103.50GB
+          storagePoolUri: '/rest/storage-pools/E7FEC112-C63D-4FFF-8201-9B0B5A6DB2C5'
+  delegate_to: localhost

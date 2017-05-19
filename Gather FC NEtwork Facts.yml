@@ -1,0 +1,6 @@
+- name: Gather facts about a Fibre Channel Network by name
+  oneview_fc_network_facts:
+    config: "{{ playbook_dir }}/config.json"
+    name: Net-FC-A
+
+- debug: var=fc_networks

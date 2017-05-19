@@ -1,0 +1,7 @@
+- name: Delete the Server Profile Template
+  oneview_server_profile_template:
+    config: "{{ playbook_dir }}/config.json"
+    state: absent
+    data:
+      name: "AnsibleProfileTemplateTest101"
+#    delegate_to: localhost

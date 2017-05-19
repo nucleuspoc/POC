@@ -1,0 +1,9 @@
+- name: Ensure that the Fibre Channel Network is present with fabricType 'DirectAttach'
+  oneview_fc_network:
+    config: "{{ playbook_dir }}/config.json"
+    state: present
+    data:
+      name: 'New FC Network'
+      fabricType: 'FabricAttach'
+      linkStabilityTime: '30'
+      autoLoginRedistribution: true

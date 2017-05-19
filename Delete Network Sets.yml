@@ -1,0 +1,6 @@
+- name: Delete the Network Set
+  oneview_network_set:
+    config: '{{ playbook_dir }}/config.json'
+    state: absent
+    data:
+      name: 'Ansible NetworkSet'

@@ -1,0 +1,19 @@
+- name: Create a Customer Network Set
+  oneview_network_set:
+    config: '{{ playbook_dir }}/config.json'
+    state: present
+    data:
+      name: 'Network-Set-One-Cust1'
+      networkUris: #From this point on, choose the networks needed (Ethernet)
+        - 'Synergydbpoc-Mig'
+        - 'Synergydbpoc-Mgmt_21'
+
+- name: Create a Customer Network Set
+  oneview_network_set:
+    config: '{{ playbook_dir }}/config.json'
+    state: present
+    data:
+      name: 'Network-Set-One-Man'
+      networkUris: #From this point on, choose the networks needed (Ethernet)
+        - 'Synergydbpoc-Mig'
+        - 'Synergydbpoc-Mgmt_21'
