@@ -1,0 +1,49 @@
+- name: Create a basic connection-less server profile template (using names)
+  oneview_server_profile_template:
+    config: "{{ playbook_dir }}/config.json"
+    state: present
+    data:
+      name: "AnsibleProfileTemplateTest101"
+      description: "Test Description"
+      serverHardwareTypeName: "SY 480 Gen9 1"
+      enclosureGroupName: "EG-SynDB01"
+      bootMode:
+        manageMode: True
+        mode: "UEFI"
+      connections:
+        - id: 1
+          name: "DMZ1"
+          functionType: "Ethernet"
+          portId: "Auto"
+          requestedMbps: 2500 #2.5Gb
+          networkName: "Net-VLAN201-DMZ"
+          boot:
+            priority: "NotBootable"
+        - id: 2
+          name: "FC"
+          functionType: "FibreChannel"
+          portId: "Auto"
+          requestedMbps: 8000 #8Gb
+          networkName: "Net-FC-A"
+          boot:
+            priority: "NotBootable"
+      sanStorage:
+        hostOSType: 'Windows 2012 / WS2012 R2'
+        manageSanStorage: true
+        volumeAttachments:
+          - id: 1
+            volumeName: 'Synergy-Test'
+            volumeStoragePoolName: 'FC_r1'
+            volumeStorageSystemName: 'REA-3PAR01'
+            lunType: "Manual"
+            lun: 0
+            storagePaths:
+              - isEnabled: true
+                connectionId: 2
+                storageTargetType: 'Auto'
+
+- debug: var=server_profile
+- debug: var=serial_number
+- debug: var=server_hardware
+- debug: var=compliance_preview
+- debug: var=created

@@ -1,0 +1,6 @@
+- name: Create a basic connection-less server profile template (using names)
+  oneview_server_profile:
+    config: "{{ playbook_dir }}/config.json"
+    state: "absent"
+    data:
+        name: "AnsibleDeployed"

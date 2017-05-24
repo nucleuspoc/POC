@@ -1,0 +1,18 @@
+- name: Create a Storage Volume Template
+  oneview_storage_volume_template:
+    config: "{{ playbook_dir }}/config.json"
+    state: present
+    data:
+        name: 'Enhanced Physical Server'
+        state: "Configured"
+        description: "Using Ansible code to create a volume"
+        provisioning:
+             shareable: false
+             provisionType: "Thin"
+             capacity: "21474836480" #20GB
+             storagePoolUri: "/rest/storage-pools/E7FEC112-C63D-4FFF-8201-9B0B5A6DB2C5" #FC_r1
+        stateReason: "None"
+        storageSystemUri: "/rest/storage-systems/1652247" #REA-3PAR01
+        snapshotPoolUri: "/rest/storage-pools/E7FEC112-C63D-4FFF-8201-9B0B5A6DB2C5" #FC_r1
+        type: StorageVolumeTemplateV3
+  delegate_to: localhost

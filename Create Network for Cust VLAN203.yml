@@ -1,0 +1,13 @@
+- name: Ensure that the Ethernet Network is present using the default configuration
+  oneview_ethernet_network:
+    config: "{{ playbook_dir }}/config.json"
+    state: present
+    data:
+      name: 'Net-VLAN203-Cust1'
+      vlanId: '203'
+      privateNetwork: false
+      smartLink: false
+      purpose: Management
+      bandwidth:
+          maximumBandwidth: 20000
+          typicalBandwidth: 2500
