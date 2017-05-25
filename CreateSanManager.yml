@@ -1,0 +1,17 @@
+- name: Creates a Device Manager for the Brocade SAN provider with the given hostname and credentials
+  oneview_san_manager:
+    config: "{{ playbook_dir }}/config.json"
+    state: present
+    data:
+      providerDisplayName: 'Brocade Network Advisor'
+      connectionInfo:
+        - name: Host
+          value: '30.5.86.41'
+        - name: Port
+          value: '5989'
+        - name: Username
+          value: 'Administrator'
+        - name: Password
+          value: 'password'
+        - name: UseSsl
+          value: true
