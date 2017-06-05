@@ -1,0 +1,13 @@
+- name: Add ESXi Host to VCSA
+  local_action:
+        module: vmware_host
+        hostname: ukrdvmgvc001.dbpoc.uk
+        username: isibor@dbpoc.uk
+        password: Integration12
+        datacenter_name: Reading-Dev
+        cluster_name: Reading-Dev-PoC
+        esxi_hostname: 10.0.5.90
+        esxi_username: root@10.0.5.90
+        esxi_password: Start123
+        state: present
+
