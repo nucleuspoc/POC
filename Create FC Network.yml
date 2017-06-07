@@ -1,9 +1,21 @@
-- name: Ensure that the Fibre Channel Network is present with fabricType 'DirectAttach'
+- name: Create Fibre Channel network
   oneview_fc_network:
     config: "{{ playbook_dir }}/config.json"
     state: present
     data:
-      name: 'New FC Network'
+      name: 'SAN-A'
       fabricType: 'FabricAttach'
       linkStabilityTime: '30'
       autoLoginRedistribution: true
+      managedSanUri: '/rest/fc-sans/managed-sans/83af92ec-f4fa-4366-a0a1-a78500ede6b7'#San-A
+
+- name: Create Fibre Channel network
+  oneview_fc_network:
+    config: "{{ playbook_dir }}/config.json"
+    state: present
+    data:
+      name: 'SAN-B'
+      fabricType: 'FabricAttach'
+      linkStabilityTime: '30'
+      autoLoginRedistribution: true
+      managedSanUri: '/rest/fc-sans/managed-sans/8782ad40-40f7-4146-85e7-a78500ede6b7' #San-B
