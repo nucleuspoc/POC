@@ -1,4 +1,4 @@
-- name: Ensure that the Ethernet Network is present using the default configuration
+- name: Create Ethernet network for VLAN DMZ
   oneview_ethernet_network:
     config: "{{ playbook_dir }}/config.json"
     state: present
@@ -12,7 +12,7 @@
           maximumBandwidth: 20000
           typicalBandwidth: 2500
 
-- name: Ensure that the Ethernet Network is present using the default configuration
+- name: Create Ethernet network for VLAN Management
   oneview_ethernet_network:
     config: "{{ playbook_dir }}/config.json"
     state: present
@@ -26,13 +26,41 @@
           maximumBandwidth: 20000
           typicalBandwidth: 2500
 
-- name: Ensure that the Ethernet Network is present using the default configuration
+- name: Create Ethernet network for VLAN Customer
   oneview_ethernet_network:
     config: "{{ playbook_dir }}/config.json"
     state: present
     data:
       name: 'Net-VLAN203-Cust'
       vlanId: '203'
+      privateNetwork: false
+      smartLink: false
+      purpose: Management
+      bandwidth:
+          maximumBandwidth: 20000
+          typicalBandwidth: 2500
+
+- name: Create Ethernet network for Management (Synergy)
+  oneview_ethernet_network:
+    config: "{{ playbook_dir }}/config.json"
+    state: present
+    data:
+      name: 'Management'
+      vlanId: '1001'
+      privateNetwork: false
+      smartLink: false
+      purpose: Management
+      bandwidth:
+          maximumBandwidth: 20000
+          typicalBandwidth: 2500
+
+- name: Create Ethernet network for Deployment (Synergy)
+  oneview_ethernet_network:
+    config: "{{ playbook_dir }}/config.json"
+    state: present
+    data:
+      name: 'Deployment'
+      vlanId: '1002'
       privateNetwork: false
       smartLink: false
       purpose: Management
