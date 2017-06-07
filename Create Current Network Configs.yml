@@ -1,0 +1,91 @@
+- name: Create Ethernet network for VLAN DMZ
+  oneview_ethernet_network:
+    config: "{{ playbook_dir }}/config.json"
+    state: present
+    data:
+      name: 'Net-VLAN201-DMZ'
+      vlanId: '201'
+      privateNetwork: false
+      smartLink: false
+      purpose: Management
+      bandwidth:
+          maximumBandwidth: 20000
+          typicalBandwidth: 2500
+
+- name: Create Ethernet network for VLAN Management
+  oneview_ethernet_network:
+    config: "{{ playbook_dir }}/config.json"
+    state: present
+    data:
+      name: 'Net-VLAN202-Man'
+      vlanId: '202'
+      privateNetwork: false
+      smartLink: false
+      purpose: Management
+      bandwidth:
+          maximumBandwidth: 20000
+          typicalBandwidth: 2500
+
+- name: Create Ethernet network for VLAN Customer
+  oneview_ethernet_network:
+    config: "{{ playbook_dir }}/config.json"
+    state: present
+    data:
+      name: 'Net-VLAN203-Cust'
+      vlanId: '203'
+      privateNetwork: false
+      smartLink: false
+      purpose: Management
+      bandwidth:
+          maximumBandwidth: 20000
+          typicalBandwidth: 2500
+
+- name: Create Ethernet network for Management (Synergy)
+  oneview_ethernet_network:
+    config: "{{ playbook_dir }}/config.json"
+    state: present
+    data:
+      name: 'Management'
+      vlanId: '1001'
+      privateNetwork: false
+      smartLink: false
+      purpose: Management
+      bandwidth:
+          maximumBandwidth: 20000
+          typicalBandwidth: 2500
+
+- name: Create Ethernet network for Deployment (Synergy)
+  oneview_ethernet_network:
+    config: "{{ playbook_dir }}/config.json"
+    state: present
+    data:
+      name: 'Deployment'
+      vlanId: '1002'
+      privateNetwork: false
+      smartLink: false
+      purpose: Management
+      bandwidth:
+          maximumBandwidth: 20000
+          typicalBandwidth: 2500
+
+- name: Create Fibre Channel network
+  oneview_fc_network:
+    config: "{{ playbook_dir }}/config.json"
+    state: present
+    data:
+      name: 'SAN-A'
+      fabricType: 'FabricAttach'
+      linkStabilityTime: '30'
+      autoLoginRedistribution: true
+      managedSanUri: '/rest/fc-sans/managed-sans/83af92ec-f4fa-4366-a0a1-a78500ede6b7'#San-A
+
+- name: Create Fibre Channel network
+  oneview_fc_network:
+    config: "{{ playbook_dir }}/config.json"
+    state: present
+    data:
+      name: 'SAN-B'
+      fabricType: 'FabricAttach'
+      linkStabilityTime: '30'
+      autoLoginRedistribution: true
+      managedSanUri: '/rest/fc-sans/managed-sans/8782ad40-40f7-4146-85e7-a78500ede6b7' #San-B

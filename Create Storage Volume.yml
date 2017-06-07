@@ -1,13 +1,34 @@
-- name: Create a Volume with a specified Storage Pool
+- name: Create ESXi Shared Data Volume
   oneview_volume:
     config: "{{ playbook_dir }}/config.json"
     state: present
     data:
-      name: 'Volume with Storage Pool'
-      description: 'Test volume with common creation: Storage Pool'
+      name: 'ESXi-Shared-Vol-Data01'
+      description: 'Data Volume for ESXi'
+      raidLevel: "RAID5"
       provisioningParameters:
-          provisionType: 'Full'
+          provisionType: 'Thin' #Thin or Full
           shareable: True
-          requestedCapacity: 111073741824  # 103.50GB
-          storagePoolUri: '/rest/storage-pools/E7FEC112-C63D-4FFF-8201-9B0B5A6DB2C5'
+          requestedCapacity: 536870912000  # 500GB
+          storagePoolUri: '/rest/storage-pools/1DC00A43-CBC7-4EC6-AB74-2F3EC02949F0'#FC_r5
+      storageSystemUri: '/rest/storage-systems/1652247' #RE-3PAR01
+      snapshotPoolUri: '/rest/storage-pools/1DC00A43-CBC7-4EC6-AB74-2F3EC02949F0'#FC_r5
   delegate_to: localhost
+
+- name: Create ESXi Shared Log Volume
+  oneview_volume:
+    config: "{{ playbook_dir }}/config.json"
+    state: present
+    data:
+      name: 'ESXi-Shared-Vol-Log-01'
+      description: 'Log volume for share ESXi'
+      raidLevel: "RAID5"
+      provisioningParameters:
+          provisionType: 'Thin' #Thin or Full
+          shareable: True
+          requestedCapacity: 53687091200  # 50GB
+          storagePoolUri: '/rest/storage-pools/1DC00A43-CBC7-4EC6-AB74-2F3EC02949F0'#FC_r5
+      storageSystemUri: '/rest/storage-systems/1652247' #RE-3PAR01
+      snapshotPoolUri: '/rest/storage-pools/1DC00A43-CBC7-4EC6-AB74-2F3EC02949F0'#FC_r5
+  delegate_to: localhost
+

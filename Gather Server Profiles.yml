@@ -1,0 +1,14 @@
+- name: Gather facts about all Server Profiles
+  oneview_server_profile_facts:
+    config: "{{ playbook_dir }}/config.json"
+  delegate_to: localhost
+
+- debug: var=server_profiles
+
+- name: Gather facts about a Server Profile by name
+  oneview_server_profile_facts:
+    config: "{{ playbook_dir }}/config.json"
+    name: "INSERT NAME HERE" #Name of profile needs to be inputted
+  delegate_to: localhost
+
+- debug: var=server_profiles

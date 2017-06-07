@@ -1,0 +1,7 @@
+- name: Delete the Storage Volume Template
+  oneview_storage_volume_template:
+    config: "{{ playbook_dir }}/config.json"
+    state: absent
+    data:
+        name: 'Ansible Volume Creation'
+  delegate_to: localhost

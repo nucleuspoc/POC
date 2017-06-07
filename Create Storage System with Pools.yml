@@ -1,0 +1,25 @@
+- name: Create a Storage System with 3 managed pool
+  oneview_storage_system:
+    config: "{{ playbook_dir }}/config.json"
+    state: present
+    data:
+        credentials:
+            ip_hostname: '30.5.86.1'
+            username: '3paradm'
+            password: '3pardata'
+        managedDomain: NO DOMAIN
+        managedPools:
+          - domain: NO DOMAIN
+            type: StoragePoolV2
+            name: "FC_r1"
+            deviceType: FC
+          - domain: NO DOMAIN
+            type: StoragePoolV2
+            name: "FC_r5"
+            deviceType: FC
+          - domain: NO DOMAIN
+            type: StoragePoolV2
+            name: "FC_r6"
+            deviceType: FC
+
+  delegate_to: localhost

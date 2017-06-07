@@ -1,0 +1,35 @@
+- name: Create a basic connection-less server profile template (using names)
+  oneview_server_profile:
+    config: "{{ playbook_dir }}/config.json"
+    state: "present"
+    data:
+        name: "AnsibleDeployed"
+        description: "This is a test to ensure the deployment of the Template AND Image Streamer ESXi 6.5 deployment"
+        server_template: "AnsibleProfileTemplateTest101"
+        osDeploymentSettings:
+          osDeploymentPlanName: "Deploy-ESXi-6.5"
+          osCustomAttributes:
+            -  name: Hostname
+               value: "esxi01"
+            -  name: ManagementNIC.connectionid
+               value: 2
+            -  name: ManagementNIC.dhcp
+               value: false
+            -  name: ManagementNIC.ipv4disable
+               value: false
+            -  name: ManagementNIC.networkuri
+               value: "/rest/ethernet-networks/f3c10478-dee0-4850-ad6d-c635442f86b7"
+            -  name: ManagementNIC.constraint
+               value: "userspecified"
+            -  name: ManagementNIC.dns1
+               value: "30.5.86.7"
+            -  name: ManagementNIC.dns2
+               value: "30.5.86.8"
+            -  name: ManagementNIC.netmask
+               value: "255.255.255.0"
+            -  name: ManagementNIC.ipaddress
+               value: "10.0.5.90"
+            -  name: ManagementNIC.gateway
+               value: "10.0.5.1"                   
+#  delegate_to: localhost
+ # register: result
