@@ -5,8 +5,7 @@
     data:
       name: 'Network-Set-One-Cust1'
       networkUris: #From this point on, choose the networks needed (Ethernet)
-        - 'Synergydbpoc-Mig'
-        - 'Synergydbpoc-Mgmt_21'
+        - 'Net-VLAN203-Cust'
 
 - name: Create a Customer Network Set
   oneview_network_set:
@@ -15,5 +14,5 @@
     data:
       name: 'Network-Set-One-Man'
       networkUris: #From this point on, choose the networks needed (Ethernet)
-        - 'Synergydbpoc-Mig'
-        - 'Synergydbpoc-Mgmt_21'
+        - 'Net-VLAN201-DMZ'
+        - 'Net-VLAN202-Man'
