@@ -1,0 +1,6 @@
+- name: Ensure that the Logical Interconnect Group is absent
+  oneview_logical_interconnect_group:
+    config: "{{ playbook_dir }}/config.json"
+    state: absent
+    data:
+      name: 'Test Logical Interconnect Group'   #update name based on the LIG required to be deleted 

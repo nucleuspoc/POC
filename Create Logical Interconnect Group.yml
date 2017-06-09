@@ -1,0 +1,145 @@
+- name: Ensure that the Logical Interconnect Group is present
+  oneview_logical_interconnect_group:
+    config: "{{ playbook_dir }}/config.json"
+    state: present
+    data:
+      name: 'Test Logical Interconnect Group' #Name of the LIG
+      enclosureIndexes: [1]
+      enclosureType: "SY12000"
+      interconnectBaySet: 3
+      redundancyType: "Redundant"
+#
+# Now for the interconnect connections
+#
+      interconnectMapTemplate:
+        interconnectMapEntryTemplates:
+          - logicalDownlinkUri: ~
+            logicalLocation:
+                locationEntries:
+                    - relativeValue: 3
+                      type: "Bay"
+                    - relativeValue: 1
+                      type: "Enclosure"
+            permittedInterconnectTypeName: 'Virtual Connect SE 40Gb F8 Module for Synergy'
+          - logicalDownlinkUri: ~
+            logicalLocation:
+                locationEntries:
+                    - relativeValue: 6
+                      type: "Bay"
+                    - relativeValue: 1
+                      type: "Enclosure"
+            permittedInterconnectTypeName: 'Virtual Connect SE 40Gb F8 Module for Synergy'
+#
+# This is the Uplink Set code. Everytime logical Port Config Infos appears, its a new uplink. For visual aid, a single '#' will be used to break up the code
+#
+      uplinkSets:
+        - logicalPortConfigInfos:
+          - desiredSpeed: "Auto"
+            logicalLocation:
+                  locationEntries:
+                    - relativeValue: 6
+                      type: "Bay"
+                    - relativeValue: 62 #Port Q1:1
+                      type: "Port"
+                    - relativeValue: 1
+                      type: "Enclosure"
+          - desiredSpeed: "Auto"
+            logicalLocation:
+                  locationEntries:
+                    - relativeValue: 6
+                      type: "Bay"
+                    - relativeValue: 67 #Port Q2:1
+                      type: "Port"
+                    - relativeValue: 1
+                      type: "Enclosure"
+          name: "SAN-B-UplinkSet" #Name of the Uplink
+          mode: "Auto"
+          networkType: "FibreChannel" #Ethernet is the other option
+          networkUris:
+            - '/rest/fc-networks/7c3e90d6-35f5-430d-bc9b-9da562ceed65' #SAN-B Uri
+#
+        - logicalPortConfigInfos:
+          - desiredSpeed: "Auto"
+            logicalLocation:
+                  locationEntries:
+                    - relativeValue: 3
+                      type: "Bay"
+                    - relativeValue: 67 #Port Q2:1
+                      type: "Port"
+                    - relativeValue: 1
+                      type: "Enclosure"
+          - desiredSpeed: "Auto"
+            logicalLocation:
+                  locationEntries:
+                    - relativeValue: 3
+                      type: "Bay"
+                    - relativeValue: 62 #Port Q1:1
+                      type: "Port"
+                    - relativeValue: 1
+                      type: "Enclosure"
+          name: "SAN-A-UplinkSet" #Name of the Uplink
+          mode: "Auto"
+          networkType: "FibreChannel" #Ethernet / FibreChannel are the options
+          networkUris:
+            - '/rest/fc-networks/b8498019-6ef7-4fd9-bfa1-323b22507865' #SAN-A Uri
+#
+        - logicalPortConfigInfos:
+          - desiredSpeed: "Auto"
+            logicalLocation:
+                  locationEntries:
+                    - relativeValue: 3
+                      type: "Bay"
+                    - relativeValue: 87 #Port Q1:1 Ethernet + FCoE Capability
+                      type: "Port"
+                    - relativeValue: 1
+                      type: "Enclosure"
+          name: "Deployment-Uplink" #Name of the Uplink
+          mode: "Auto"
+          networkType: "Ethernet" #Ethernet / FibreChannel are the options
+          networkUris:
+            - '/rest/ethernet-networks/573a0818-8925-4201-87b7-c284e42272d6' #Deployment Uri
+#
+        - logicalPortConfigInfos:
+          - desiredSpeed: "Auto"
+            logicalLocation:
+                  locationEntries:
+                    - relativeValue: 6
+                      type: "Bay"
+                    - relativeValue: 72 #Port Q3:1 Ethernet + FCoE Capability
+                      type: "Port"
+                    - relativeValue: 1
+                      type: "Enclosure"
+          - desiredSpeed: "Auto"
+            logicalLocation:
+                  locationEntries:
+                    - relativeValue: 6
+                      type: "Bay"
+                    - relativeValue: 77 #Port Q4:1 Ethernet + FCoE Capability
+                      type: "Port"
+                    - relativeValue: 1
+                      type: "Enclosure"
+          - desiredSpeed: "Auto"
+            logicalLocation:
+                  locationEntries:
+                    - relativeValue: 3
+                      type: "Bay"
+                    - relativeValue: 72 #Port Q3:1 Ethernet + FCoE Capability
+                      type: "Port"
+                    - relativeValue: 1
+                      type: "Enclosure"
+          - desiredSpeed: "Auto"
+            logicalLocation:
+                  locationEntries:
+                    - relativeValue: 3
+                      type: "Bay"
+                    - relativeValue: 77 #Port Q4:1 Ethernet + FCoE Capability
+                      type: "Port"
+                    - relativeValue: 1
+                      type: "Enclosure"
+          name: "LAN-UplinkSet" #Name of the Uplink
+          mode: "Auto"
+          networkType: "Ethernet" #Ethernet / FibreChannel are the options
+          networkUris:
+            - '/rest/ethernet-networks/f3c10478-dee0-4850-ad6d-c635442f86b7' #Net-Vlan201-DMZ Uri
+            - '/rest/ethernet-networks/43564690-c48f-40d3-98a6-b86235c9a352' #Net-Vlan202-Man Uri
+            - '/rest/ethernet-networks/074f0510-40ef-4ccf-a6d8-24da7c4a6971' #Net-Vlan203-Cust Uri
