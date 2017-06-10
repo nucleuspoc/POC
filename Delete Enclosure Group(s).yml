@@ -1,0 +1,6 @@
+- name: Ensure that Enclosure Group is absent
+  oneview_enclosure_group:
+    config: "{{ playbook_dir }}/config.json"
+    state: absent
+    data:
+      name: "Enclosure Group 1"

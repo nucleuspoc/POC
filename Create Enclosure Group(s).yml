@@ -1,0 +1,35 @@
+- name: Ensure that Enclosure Group is present using the default configuration
+  oneview_enclosure_group:
+    config: "{{ playbook_dir }}/config.json"
+    state: present
+    data:
+      name: "Enclosure Group 1"
+      description: "Insert description on Enclosure Group"
+      powerMode: "RedundantPowerFeed"
+      enclosureType: "SY12000"
+      stackingMode: "Enclosure"
+      enclsoureCount: 1
+      interconnectBayMappingCount: 2
+      interconnectBayMappings:
+        - interconnectBay: 1
+        - interconnectBay: 2
+        - interconnectBay: 3
+          logicalInterconnectGroupUri: "/rest/logical-interconnect-groups/974a4840-151d-469e-94a6-b5730d1792d7" #  SYN-DBPOC-EG
+        - interconnectBay: 4
+        - interconnectBay: 5
+        - interconnectBay: 6
+          logicalInterconnectGroupUri: "/rest/logical-interconnect-groups/974a4840-151d-469e-94a6-b5730d1792d7" #  SYN-DBPOC-EG
+#
+# IP Section: Uri is the Management IP added in settings...NOT in Networks
+#
+      ipAddressingMode: "IpPool"
+      ipRangeUris:
+        - "/rest/id-pools/ipv4/ranges/02f4bd9c-c3c6-4315-aa6d-43cec38cdce5"
+#
+# OS Deploment Settings
+#
+      osDeploymentSettings:
+        manageOSDeployment: true
+        deploymentModeSettings:
+          deploymentMode: "External"
+          deploymentNetworkUri: "/rest/ethernet-networks/573a0818-8925-4201-87b7-c284e42272d6" #Deployment Netork
